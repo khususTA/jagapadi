@@ -1,7 +1,11 @@
+# Sampah Python
 __pycache__/
 *.pyc
-*.log
+
+# Virtual Environment
 venv/
+
+# File & Folder runtime
 uploads/
 logs/
 clipper_file/
@@ -10,4 +14,9 @@ hasil_dekripsi/
 original_images/
 cache_history/
 client_logs/
+
+# File model berat
 *.pt
+
+# File log umum
+*.log
