@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JAGAPADI v2.0 - Deteksi Hama Padi AI</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header Bar -->
+    <div class="header-bar">
+        <button class="toggle-sidebar-btn" id="toggleSidebar">☰</button>
+        <button class="dark-mode-btn" id="darkModeBtn">🌓</button>
+        <div class="logo-header">
+            <span class="logo-icon">🌾</span>
+            <h1>JAGAPADI</h1>
+            <span class="version-badge">v2.0</span>
+        </div>
+    </div>
+
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h2>🌾 JAGAPADI</h2>
+            <p>AI Deteksi Hama Padi v2.0</p>
+        </div>
+
+        <!-- Connection Section -->
+        <div class="connection-section">
+            <div class="connection-status">
+                <div class="status-indicator" id="statusIndicator"></div>
+                <span class="status-text" id="statusText">Tidak Terhubung</span>
+            </div>
+            <button class="connect-btn" id="btn-connect">Connect</button>
+        </div>
+
+        <!-- Statistics Section -->
+        <div class="stats-section">
+            <h3 class="stats-title">📊 Statistik Hari Ini</h3>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number" id="todayDetections">0</div>
+                    <div class="stat-label">Deteksi</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="todayAccuracy">0%</div>
+                    <div class="stat-label">Akurasi</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- History Section -->
+        <div class="history-section">
+            <h3 class="history-title">📋 Riwayat Deteksi</h3>
+            <div class="history-list" id="historyList">
+                <!-- History items will be added here dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Main Header -->
+        <div class="main-header">
+            <h2>Deteksi Hama Padi</h2>
+            <p class="main-subtitle">Ambil foto atau pilih gambar untuk analisis AI</p>
+            <div class="connection-indicator" id="mainConnectionStatus">
+                <div class="status-dot" id="mainStatusDot"></div>
+                <span id="mainStatusText">Siap untuk deteksi</span>
+            </div>
+        </div>
+
+        <!-- Main Preview Area -->
+        <div class="preview-container" id="previewContainer">
+            <!-- Empty State -->
+            <div class="preview-empty-state" id="emptyState">
+                <div class="empty-icon">📷</div>
+                <h3>Siap untuk Deteksi</h3>
+                <p>Ambil foto baru atau pilih gambar dari galeri</p>
+            </div>
+
+            <!-- Image Preview -->
+            <div class="preview-content" id="previewContent">
+                <img class="preview-image" id="previewImage" alt="Preview">
+                
+                <!-- Processing Overlay -->
+                <div class="processing-overlay" id="processingOverlay">
+                    <div class="processing-spinner"></div>
+                    <div class="processing-text" id="processingText">Menganalisis gambar...</div>
+                    <div class="processing-progress" id="processingProgress">
+                        <div class="progress-bar" id="progressBar"></div>
+                    </div>
+                </div>
+
+                <!-- Results Overlay -->
+                <div class="results-overlay" id="resultsOverlay">
+                    <div class="results-badge">
+                        <span class="results-icon">🎯</span>
+                        <span class="results-count" id="resultsCount">3 hama terdeteksi</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hidden file input -->
+            <input type="file" id="fileInput" accept="image/*" style="display: none;">
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="action-section" id="actionSection">
+            <!-- Initial State Buttons -->
+            <div class="action-group" id="initialActions">
+                <button class="action-btn primary large" id="cameraBtn" disabled>
+                    <span class="btn-icon">📷</span>
+                    <span class="btn-text">Foto Baru</span>
+                </button>
+                <button class="action-btn secondary" id="fileBtn" disabled>
+                    <span class="btn-icon">📁</span>
+                    <span class="btn-text">Pilih File</span>
+                </button>
+            </div>
+
+            <!-- Image Ready Buttons -->
+            <div class="action-group hidden" id="imageReadyActions">
+                <button class="action-btn secondary" id="changeImageBtn">
+                    <span class="btn-icon">🔄</span>
+                    <span class="btn-text">Ganti Foto</span>
+                </button>
+                <button class="action-btn primary large" id="detectBtn">
+                    <span class="btn-icon">🔍</span>
+                    <span class="btn-text">Identifikasi</span>
+                </button>
+            </div>
+
+            <!-- Processing Buttons -->
+            <div class="action-group hidden" id="processingActions">
+                <button class="action-btn disabled" disabled>
+                    <span class="btn-icon">⏳</span>
+                    <span class="btn-text">Memproses...</span>
+                </button>
+            </div>
+
+            <!-- Results Buttons -->
+            <div class="action-group hidden" id="resultsActions">
+                <button class="action-btn secondary" id="newDetectionBtn">
+                    <span class="btn-icon">📷</span>
+                    <span class="btn-text">Foto Baru</span>
+                </button>
+                <button class="action-btn primary" id="viewDetailsBtn">
+                    <span class="btn-icon">📊</span>
+                    <span class="btn-text">Lihat Detail</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Results Panel -->
+        <div class="results-panel hidden" id="resultsPanel">
+            <h3 class="results-header">🎯 Hasil Deteksi</h3>
+            
+            <div class="detection-summary">
+                <div class="summary-item">
+                    <div class="summary-number" id="detectionCount">0</div>
+                    <div class="summary-label">Hama Terdeteksi</div>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-number" id="confidenceLevel">0%</div>
+                    <div class="summary-label">Tingkat Keyakinan</div>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-number" id="processingTimeResult">0s</div>
+                    <div class="summary-label">Waktu Proses</div>
+                </div>
+            </div>
+
+            <div class="detection-details" id="detectionDetails">
+                <!-- Detection details will be populated here -->
+            </div>
+
+            <div class="recommendations" id="recommendations">
+                <h4>💊 Rekomendasi Tindakan</h4>
+                <ul id="recommendationsList">
+                    <!-- Recommendations will be populated here -->
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- History Detail Modal -->
+    <div class="modal" id="historyModal">
+        <div class="modal-content large">
+            <div class="modal-header">
+                <h3>🌾 Laporan Deteksi</h3>
+                <button class="modal-close" id="closeHistoryModal">✕</button>
+            </div>
+            <div class="modal-body" id="historyModalBody">
+                <!-- History detail content will be populated here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Password Modal -->
+    <div class="modal" id="authModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>🔐 Koneksi Server</h3>
+            </div>
+            <div class="modal-body">
+                <p>Masukkan password untuk terhubung ke server AI:</p>
+                <input type="password" id="passwordInput" placeholder="Password server" class="modal-input">
+            </div>
+            <div class="modal-buttons">
+                <button class="modal-btn secondary" id="cancelAuthBtn">Batal</button>
+                <button class="modal-btn primary" id="confirmAuthBtn">Connect</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div class="notification" id="notification"></div>
+
+    <!-- Status Bar -->
+    <div class="status-bar" id="statusBar">
+        <span class="status-text" id="globalStatus">Siap untuk deteksi</span>
+        <span class="status-time" id="statusTime"></span>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

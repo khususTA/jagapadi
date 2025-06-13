@@ -1,0 +1,38 @@
+================================================================================
+IP Client             : 10.252.132.123
+Connected             : 2025-06-12 11:47:47
+Disconnected          : 2025-06-12 11:48:40
+Total Waktu Session   : 53.42 detik
+Jumlah File           : 1
+Jumlah Deteksi        : 1
+Rata-rata Confidence  : 0.342
+================================================================================
+STATISTIK TIMING CLIENT:
+--------------------------------------------------
+Rata-rata Dekripsi Client : 0.0003 detik
+Total Dekripsi Client     : 0.0003 detik
+Rata-rata Simpan Client   : 0.0012 detik
+Total Simpan Client       : 0.0012 detik
+--------------------------------------------------
+DETAIL TRANSFER FILE:
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Nama File                 | Label Deteksi        | Uk. Asli (KB) | Uk. Enkripsi (KB) | W. Terima (s) | W. Deteksi (s) | W. Enkripsi (s) | W. Kirim (s) | Kec. Masuk (KB/s) | Kec. Keluar (KB/s) | W. Dekripsi Client (s) | W. Simpan Client (s)
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+istockphoto-51313954...   | ulat                 |        37.66 |           28.63 |       0.0003 |       10.6771 |         0.0010 |       0.0001 |         139405.0 |          214469.5 |               0.0003 |             0.0012
+
+SUMMARY TIMING LENGKAP:
+------------------------------------------------------------
+TOTAL SERVER PROCESSING:
+  - Terima data      : 0.0003 detik
+  - Deteksi YOLO     : 10.6771 detik
+  - Enkripsi AES     : 0.0010 detik
+  - Kirim hasil      : 0.0001 detik
+  - TOTAL SERVER     : 10.6785 detik
+
+TOTAL CLIENT PROCESSING:
+  - Dekripsi AES     : 0.0003 detik
+  - Simpan file      : 0.0012 detik
+  - TOTAL CLIENT     : 0.0015 detik
+
+TOTAL KESELURUHAN   : 10.6800 detik
+------------------------------------------------------------
