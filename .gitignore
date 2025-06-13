@@ -1,5 +1,6 @@
 __pycache__/
 *.pyc
+*.log
 venv/
 uploads/
 logs/
@@ -9,5 +10,4 @@ hasil_dekripsi/
 original_images/
 cache_history/
 client_logs/
-*.log
 *.pt
