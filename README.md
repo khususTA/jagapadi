@@ -1,0 +1,2 @@
+# jagapadi
+untuk tugas akhir
