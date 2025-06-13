@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+venv/
+uploads/
+logs/
+clipper_file/
+hasil_identifikasi/
+hasil_dekripsi/
+original_images/
+cache_history/
+client_logs/
+*.log
+*.pt
